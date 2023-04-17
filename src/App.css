@@ -1,0 +1,37 @@
+code span {
+  color: white;
+}
+
+.hljs-attribute {
+  color: #0095ff;
+}
+.hljs-built_in {
+  color: #8f10a5;
+}
+.hljs-number {
+  color: #b5f0b5;
+}
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.code-output > pre {
+  width: 100%;
+  overflow-y: auto;
+  background-color: #242424 !important;
+  /* background: linear-gradient(0deg, red, green); */
+  padding: 5px;
+  padding-inline: 15px;
+}

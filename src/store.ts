@@ -16,10 +16,13 @@ interface GradientStore {
   addGradient: (gradient: Gradient) => void;
   removeGradient: (index: number) => void;
   updateGradient: (index: number, gradient: Gradient) => void;
+  setCode: (index: number, code: string) => void;
+  code: string;
 }
 
 const useGradientStore = create<GradientStore>((set) => ({
   gradients: [],
+  code: "",
   addGradient: (gradient) =>
     set((state) => ({ gradients: [...state.gradients, gradient] })),
   removeGradient: (index) =>
@@ -32,6 +35,13 @@ const useGradientStore = create<GradientStore>((set) => ({
       gradients[index] = gradient;
       return { gradients };
     }),
+  setCode: (index, code) => {
+    set((state) => {
+      let codeState = state.code;
+      codeState = code;
+      return { code: codeState };
+    });
+  },
 }));
 
 export default useGradientStore;

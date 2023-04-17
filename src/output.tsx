@@ -1,6 +1,6 @@
 import useGradientStore from "./store";
 
-const Output = () => {
+const Output = ({ refT }: { refT: React.RefObject<HTMLDivElement> }) => {
     const { gradients } = useGradientStore();
 
     let code = ""
@@ -22,8 +22,9 @@ const Output = () => {
     }
 
     return (
-        <div className="w-full h-screen p-5 border-4 border-slate-800">
+        <div className="w-full small:h-screen h-[60vh] p-5 border-4 border-slate-800">
             <div
+                ref={refT}
                 className="w-full h-full"
                 style={styleObj}
             ></div>

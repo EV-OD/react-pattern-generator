@@ -10,6 +10,9 @@ export default {
         "box": "#a7ccff",
         "box-group": "#b3f9ca",
         "box-whole": "#d7ffea"
+      },
+      screens: {
+        "small": "870px"
       }
     },
   },

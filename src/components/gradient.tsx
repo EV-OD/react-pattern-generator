@@ -81,15 +81,17 @@ function InputRange({ dim, gradient, setDim, updateGradient, index, name, onChan
         {ExtraComponent &&
             ExtraComponent
         }
-        <div className="summary flex gap-2 items-center">
+        <div className="summary flex flex-col gap-2 ">
             <label htmlFor="" className="mr-auto text-white">{name || "Rotation"}</label>
-            <input type="number" className="px-1 rounded-sm bg-slate-600 text-white" value={dim} onChange={onChange ? onChange : (e) => {
-                let newGradient: Gradient = JSON.parse(JSON.stringify(gradient));
-                newGradient[name ? name : "rotation"] = Number(e.target.value);
-                setDim(Number(e.target.value));
-                updateGradient(index, newGradient);
-            }} />
-            <button className="btn btn-sm" onClick={() => setOpen(c => !c)}><ChevronDownIcon width={10} height={10} /></button>
+            <div className="group flex gap-4 justify-between">
+                <input type="number" className="px-1 rounded-sm bg-slate-600 text-white w-full" value={dim} onChange={onChange ? onChange : (e) => {
+                    let newGradient: Gradient = JSON.parse(JSON.stringify(gradient));
+                    newGradient[name ? name : "rotation"] = Number(e.target.value);
+                    setDim(Number(e.target.value));
+                    updateGradient(index, newGradient);
+                }} />
+                <button className="btn btn-sm" onClick={() => setOpen(c => !c)}><ChevronDownIcon width={10} height={10} /></button>
+            </div>
         </div>
         {open &&
             <input type="range" {...extra} value={dim} onChange={onChange ? onChange : (e) => {
