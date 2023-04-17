@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import useGradientStore from "../store";
 import ColorInput from "./ColorInput";
 import type { Gradient } from '../store'
-import { ChevronDownIcon } from "@heroicons/react/24/solid"
+import { ChevronDownIcon, TrashIcon } from "@heroicons/react/24/solid"
 
 
 const Gradient: React.FC<{ index: number }> = ({ index }) => {
-    const { updateGradient } = useGradientStore()
+    const { updateGradient, removeGradient } = useGradientStore()
     const gradient = useGradientStore((state) => state.gradients[index]);
     const [rotation, setRotation] = useState(gradient.rotation);
-    const [colors, setColors] = useState(gradient.colors)
 
     const [width, setWidth] = useState(gradient.width)
     const [height, setHeight] = useState(gradient.height)
@@ -20,7 +19,10 @@ const Gradient: React.FC<{ index: number }> = ({ index }) => {
     return <div className="bg-slate-600 p-2 rounded-md grow-[1]">
         <div className="title flex justify-between items-center">
             <h1 className="text-white text-xl text-center">Linear Gradient{index}</h1>
-            <button className="btn btn-sm" onClick={() => setIsOpen(c => !c)}><ChevronDownIcon width={10} height={10} /></button>
+            <div className="btn-group">
+                <button className="btn btn-sm" onClick={() => setIsOpen(c => !c)}><ChevronDownIcon width={10} height={10} /></button>
+                <button className="btn btn-sm" onClick={() => removeGradient(index)}><TrashIcon width={20} height={20} /></button>
+            </div>
         </div>
 
         {
@@ -31,8 +33,8 @@ const Gradient: React.FC<{ index: number }> = ({ index }) => {
                 <InputRange dim={height} name="height" gradient={gradient} setDim={setHeight} updateGradient={updateGradient} index={index} />
 
                 <div className="colorsModifier bg-slate-700 p-3 rounded-md flex flex-col gap-1">
-                    {colors.length > 0 &&
-                        colors.map((colourLocal, i) => {
+                    {gradient.colors.length > 0 &&
+                        gradient.colors.map((colourLocal, i) => {
                             return <div className="modifier" key={i}>
 
                                 <InputRange dim={colourLocal.stop} name="stop" gradient={gradient} setDim={setRotation} onChange={(e) => {
@@ -40,7 +42,6 @@ const Gradient: React.FC<{ index: number }> = ({ index }) => {
 
                                     newGradient.colors[i].stop = Number(e.target.value)
                                     updateGradient(index, newGradient)
-                                    setColors(newGradient.colors)
 
                                 }} updateGradient={updateGradient} index={index}
                                     ExtraComponent={<ColorInput c={colourLocal.valueNum} onChange={(color, colorNum) => {

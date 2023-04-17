@@ -27,11 +27,12 @@ function ColorInput({ onChange, c }: PropsType) {
 
 
     useEffect(() => {
-        window.document.addEventListener("click", (e) => {
+        const fnc = (e: MouseEvent) => {
             if (!modelRef.current?.contains(e.target as HTMLDivElement)) {
                 setColorPicker(false)
             }
-        })
+        }
+        window.document.addEventListener("click", fnc)
     })
 
 
